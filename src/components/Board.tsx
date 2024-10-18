@@ -32,7 +32,7 @@ const Board = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-0 sm:px-0 lg:px-0 py-8">
+    <div className="max-w-7xl mx-auto px-0 sm:px-0 lg:px-4 py-8">
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center space-x-2">
           <h2 className="text-3xl font-bold text-gray-900">Board</h2>

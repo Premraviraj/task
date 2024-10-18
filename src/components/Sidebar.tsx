@@ -8,7 +8,7 @@ const Sidebar = () => {
   return (
     <aside className="bg-white w-80 h-full flex flex-col">
       <div className="p-4 flex items-center">
-        <div className="bg-indigo-600 rounded-lg p-0">
+        <div className="bg-indigo-600 rounded-lg p-4">
           <span className="text-white font-bold">weihu</span>
         </div>
       </div>
@@ -21,7 +21,6 @@ const Sidebar = () => {
         <SidebarItem icon={<LayoutDashboard />} text="Dashboard" to="/dashboard" active={location.pathname === '/dashboard'} />
         <SidebarItem icon={<Calendar />} text="Schedule" to="/schedule" active={location.pathname === '/schedule'} />
         <SidebarItem icon={<Clipboard />} text="Note" to="/note" active={location.pathname === '/note'} />
-        <SidebarItem icon={<Package />} text="Products" to="/products" active={location.pathname === '/products'} />
         <SidebarItem icon={<BarChart2 />} text="Report" to="/report" active={location.pathname === '/report'} />
         <div className="pt-4 pb-2">
           <p className="px-4 text-xs font-semibold text-gray-400 uppercase">RECORDS</p>
@@ -33,10 +32,10 @@ const Sidebar = () => {
       </nav>
       <div className="p-4 border-t border-gray-200">
         <div className="flex items-center">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="User" className="w-8 h-8 rounded-full mr-2" />
+          <img src="https://demo-source.imgix.net/head_shot.jpg" alt="User" className="w-8 h-8 rounded-full mr-2" />
           <div>
-            <p className="text-sm font-medium">Brooklyn Simmons</p>
-            <p className="text-xs text-gray-500">simmons@gmail.com</p>
+            <p className="text-sm font-medium">Prem R</p>
+            <p className="text-xs text-gray-500">premraviraj2004@gmail.com</p>
           </div>
         </div>
       </div>

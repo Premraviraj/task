@@ -7,7 +7,6 @@ import Activities from './pages/Activities';
 import Dashboard from './pages/Dashboard';
 import Schedule from './pages/Schedule';
 import Note from './pages/Note';
-import Products from './pages/Products';
 import Report from './pages/Report';
 import Team from './pages/Team';
 import Clients from './pages/Clients';
@@ -28,7 +27,6 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/schedule" element={<Schedule />} />
               <Route path="/note" element={<Note />} />
-              <Route path="/products" element={<Products />} />
               <Route path="/report" element={<Report />} />
               <Route path="/team" element={<Team />} />
               <Route path="/clients" element={<Clients />} />

@@ -5,10 +5,10 @@ const Header = () => {
   return (
     <header className="bg-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-0 lg:px-0">
-        <div className="flex justify-between items-center py-0">
+        <div className="flex justify-between items-center py-4">
           <div>
-            <h1 className="text-2xl font-semibold text-gray-900">Welcome, Brooklyn Simmons</h1>
-            <p className="text-sm text-gray-500">Today is Saturday, Jul 9th, 2023</p>
+            <h1 className="text-2xl font-semibold text-gray-900">Welcome, Prem</h1>
+            <p className="text-sm text-gray-500">Today is friday, Oct 19th, 2024</p>
           </div>
           <div className="flex items-center space-x-4">
             <div className="relative">
