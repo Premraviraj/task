@@ -16,14 +16,14 @@ const Sidebar = () => {
         <SidebarItem icon={<Clipboard />} text="Tasks"to="/" active={location.pathname === '/'} />
         <SidebarItem icon={<Zap />} text="Activities" to="/activities" active={location.pathname === '/activities'} />
         <div className="pt-4 pb-2">
-          <p className="px-4 text-xs font-semibold text-gray-400 uppercase">MAIN</p>
+          <p className="px-4 text-xs font-bold text-gray-400 uppercase">MAIN</p>
         </div>
         <SidebarItem icon={<LayoutDashboard />} text="Dashboard" to="/dashboard" active={location.pathname === '/dashboard'} />
         <SidebarItem icon={<Calendar />} text="Schedule" to="/schedule" active={location.pathname === '/schedule'} />
         <SidebarItem icon={<Clipboard />} text="Note" to="/note" active={location.pathname === '/note'} />
         <SidebarItem icon={<BarChart2 />} text="Report" to="/report" active={location.pathname === '/report'} />
         <div className="pt-4 pb-2">
-          <p className="px-4 text-xs font-semibold text-gray-400 uppercase">RECORDS</p>
+          <p className="px-4 text-xs font-bold text-gray-400 uppercase">RECORDS</p>
         </div>
         <SidebarItem icon={<Users />} text="Team" to="/team" active={location.pathname === '/team'} />
         <SidebarItem icon={<UserCircle2 />} text="Clients" to="/clients" active={location.pathname === '/clients'} />
@@ -32,7 +32,7 @@ const Sidebar = () => {
       </nav>
       <div className="p-4 border-t border-gray-200">
         <div className="flex items-center">
-          <img src="https://demo-source.imgix.net/head_shot.jpg" alt="User" className="w-8 h-8 rounded-full mr-2" />
+          <img src="https://demo-source.imgix.net/head_shot.jpg" alt="User" className="w-8 h-8 rounded-full mr-0" />
           <div>
             <p className="text-sm font-medium">Prem R</p>
             <p className="text-xs text-gray-500">premraviraj2004@gmail.com</p>
