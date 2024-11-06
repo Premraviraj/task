@@ -1,74 +1,66 @@
-import React, { useState } from 'react'
-import { Heart, MoreHorizontal, LayoutGrid, LayoutList } from 'lucide-react'
+import React from 'react';
+
+interface TeamProps {
+  isDarkMode: boolean;
+}
 
 interface TeamMember {
-  id: number
-  name: string
-  email: string
-  imageUrl: string
-  isFavorite: boolean
+  name: string;
+  role: string;
+  image: string;
 }
 
-const TeamMemberCard: React.FC<{ member: TeamMember; onToggleFavorite: (id: number) => void }> = ({ member, onToggleFavorite }) => {
+const teamMembers: TeamMember[] = [
+  { name: 'Jessica Dobrev', role: 'Backend Lead', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=707b9c33066bf8808c934c8ab394dff6' },
+  { name: 'Drew Cano', role: 'Head of UX', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=a72ca28288878f8404a795f39642a46f' },
+  { name: 'Sasha Kindred', role: 'VP of Marketing', image: 'https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=aa3a807e1bbdfd4364d1f449eaa96d82' },
+  { name: 'Emily Donnavan', role: 'Product Lead', image: 'https://images.unsplash.com/photo-1546967191-fdfb13ed6b1e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ' },
+  { name: 'Orlando Diggs', role: 'Co-Founder and COO', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ' },
+  { name: 'Sophie Chamberlain', role: 'Head of Sales', image: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ' },
+  { name: 'Lana Steiner', role: 'VP of Customer Success', image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ' },
+  { name: 'Emmy Rosum', role: 'Co-Founder and CEO', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ' },
+];
+
+const Team: React.FC<TeamProps> = ({ isDarkMode }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center relative">
-      <button 
-        className="absolute top-2 left-2 text-gray-400 hover:text-blue-500 transition-colors"
-        onClick={() => onToggleFavorite(member.id)}
-      >
-        <Heart className={`w-5 h-5 ${member.isFavorite ? 'fill-blue-500 text-blue-500' : ''}`} />
-      </button>
-      <button className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 transition-colors">
-        <MoreHorizontal className="w-5 h-5" />
-      </button>
-      <img src={member.imageUrl} alt={member.name} className="w-24 h-24 rounded-full mb-4 object-cover" />
-      <h3 className="text-lg font-semibold text-gray-800">{member.name}</h3>
-      <p className="text-sm text-gray-500">{member.email}</p>
-    </div>
-  )
-}
-
-export default function TeamMembersDisplay() {
-  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([
-    { id: 1, name: "Allyson Booker", email: "allyson.booker@gmail.com", imageUrl: "https://i.pravatar.cc/150?img=${i + 1}", isFavorite: true },
-    { id: 2, name: "Nikolas Cabrera", email: "nikolas.cabrera@gmail.com", imageUrl: "https://i.pravatar.cc/150?img=61/150?img=${i + 1}", isFavorite: false },
-    { id: 3, name: "Cristofer Leblanc", email: "cristofer.leblanc@gmail.com", imageUrl: "https://i.pravatar.cc/150?img=45/150?img=${i + 1}", isFavorite: true },
-    { id: 4, name: "Jordan Villarreal", email: "jordan.villarreal@gmail.com", imageUrl: "https://i.pravatar.cc/150?img=63c/150?img=8/150?img=${i + 1}", isFavorite: false },
-    { id: 5, name: "Damon Baxter", email: "damon.baxter@gmail.com", imageUrl: "https://i.pravatar.cc/150?img=${i + 1}", isFavorite: false },
-    { id: 6, name: "Bryant Diaz", email: "bryant.diaz@gmail.com", imageUrl: "https://i.pravatar.cc/150?img=64/150?img=${i + 1}", isFavorite: true },
-    { id: 7, name: "Patience Harrington", email: "patience.harrington@gmail.com", imageUrl: "https://i.pravatar.cc/150?img=38/150?img=${i + 1}", isFavorite: true },
-    { id: 8, name: "Cristian Mullins", email: "cristian.mullins@gmail.com", imageUrl: "https://i.pravatar.cc/150?img=54/150?img=22/150?img=${i + 1}", isFavorite: true },
-    { id: 9, name: "Kira Collier", email: "kira.collier@gmail.com", imageUrl: "https://i.pravatar.cc/150?img=54/150?img=${i + 1}", isFavorite: false },
-    { id: 10, name: "Jaelyn Ferrell", email: "jaelyn.ferrell@gmail.com", imageUrl: "https://i.pravatar.cc/150?img=38c/150?img=${i + 1}", isFavorite: true },
-    { id: 11, name: "Ross Jordan", email: "ross.jordan@gmail.com", imageUrl: "https://i.pravatar.cc/150?img=36/150?img=${i + 1}", isFavorite: false },
-    { id: 12, name: "Monica Dickerson", email: "monica.dickerson@gmail.com", imageUrl: "https://i.pravatar.cc/150?img=78/150?img=${i + 1}", isFavorite: false },
-  ])
-
-  const toggleFavorite = (id: number) => {
-    setTeamMembers(members =>
-      members.map(member =>
-        member.id === id ? { ...member, isFavorite: !member.isFavorite } : member
-      )
-    )
-  }
-
-  return (
-    <div className="bg-gray-100 min-h-screen p-8">
+    <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'} py-12 px-4 sm:px-6 lg:px-8`}>
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center mb-8">
-          <div className="bg-blue-500 text-white p-2 rounded mr-3">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
-          </div>
-          <h1 className="text-2xl font-bold text-gray-800">Team Members</h1>
+        <div className="text-center">
+          <h2 className="text-3xl font-extrabold sm:text-4xl">
+            We bring a wealth of skills and experience
+          </h2>
+          <h3 className="text-3xl font-extrabold sm:text-4xl mb-4">
+            from a wide range of backgrounds.
+          </h3>
+          <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+            Our philosophy is simple: hire great people and give them
+            the resources and support to do their best work.
+          </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {teamMembers.map(member => (
-            <TeamMemberCard key={member.id} member={member} onToggleFavorite={toggleFavorite} />
+
+        <div className="mt-12 grid gap-5 max-w-lg mx-auto lg:grid-cols-4 lg:max-w-none">
+          {teamMembers.map((member) => (
+            <div key={member.name} className="flex flex-col rounded-lg shadow-lg overflow-hidden">
+              <div className="flex-shrink-0 relative overflow-hidden group">
+                <img 
+                  className="h-48 w-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300 transform group-hover:scale-110" 
+                  src={member.image} 
+                  alt={member.name} 
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300"></div>
+              </div>
+              <div className={`flex-1 ${isDarkMode ? 'bg-gray-800' : 'bg-white'} p-6 flex flex-col justify-between`}>
+                <div className="flex-1">
+                  <p className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{member.name}</p>
+                  <p className={`mt-3 text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-500'}`}>{member.role}</p>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+
+export default Team;

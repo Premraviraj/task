@@ -1,55 +1,168 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Zap, Calendar, Clipboard, Package, BarChart2, Users, UserCircle2, Settings, HelpCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { LayoutDashboard, Calendar, Users, Settings, HelpCircle, MessageSquare, LogOut, ChevronRight, Mail, Phone } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import logo from '../assets/logo.png';
 
-const Sidebar = () => {
-  const location = useLocation();
+interface SidebarProps {
+  onLogout: () => void;
+  isDarkMode: boolean;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ onLogout, isDarkMode }) => {
+  const [isOpen, setIsOpen] = useState(true);
+  const [isLogoHovered, setIsLogoHovered] = useState(false);
+  const [showCredentials, setShowCredentials] = useState(false);
+
+  const menuItems = [
+    { icon: <LayoutDashboard className="w-6 h-6" />, label: 'Dashboard', path: '/dashboard' },
+    { icon: <Calendar className="w-6 h-6" />, label: 'Schedule', path: '/schedule' },
+    { icon: <MessageSquare className="w-6 h-6" />, label: 'Activities', path: '/activities' },
+    { icon: <Users className="w-6 h-6" />, label: 'Team', path: '/team' },
+    { icon: <Settings className="w-6 h-6" />, label: 'Settings', path: '/settings' },
+    { icon: <HelpCircle className="w-6 h-6" />, label: 'Support', path: '/support' },
+  ];
+
+  const sidebarVariants = {
+    open: { width: '16rem' },
+    closed: { width: '5rem' },
+  };
+
+  const menuItemVariants = {
+    open: { opacity: 1, x: 0 },
+    closed: { opacity: 0, x: -20 },
+  };
+
+  const logoVariants = {
+    hovered: { scale: 1.2, rotate: 360 },
+    unhovered: { scale: 1, rotate: 0 },
+  };
+
+  const chevronVariants = {
+    open: { rotate: 0 },
+    closed: { rotate: 180 },
+  };
+
+  const credentialsVariants = {
+    hidden: { opacity: 0, y: -20, scale: 0.9 },
+    visible: { opacity: 1, y: 0, scale: 1 },
+  };
 
   return (
-    <aside className="bg-white w-80 h-full flex flex-col">
-      <div className="p-4 flex items-center">
-        <div className="bg-indigo-600 rounded-lg p-4">
-          <span className="text-white font-bold">weihu</span>
+    <motion.div
+      variants={sidebarVariants}
+      initial="open"
+      animate={isOpen ? 'open' : 'closed'}
+      transition={{ duration: 0.3, type: 'tween' }}
+      className={`${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'} h-screen flex flex-col justify-between relative`}
+    >
+      <div className="p-4">
+        <div className="mb-6 flex justify-between items-center">
+          <motion.div
+            variants={logoVariants}
+            initial="unhovered"
+            animate={isLogoHovered ? 'hovered' : 'unhovered'}
+            transition={{ duration: 0.3 }}
+            onMouseEnter={() => setIsLogoHovered(true)}
+            onMouseLeave={() => setIsLogoHovered(false)}
+            onClick={() => setShowCredentials(!showCredentials)}
+            className="relative w-12 h-12 rounded-full overflow-hidden cursor-pointer"
+          >
+            <img 
+              src={logo} 
+              alt="P" 
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+          <motion.button
+            variants={chevronVariants}
+            initial="open"
+            animate={isOpen ? 'open' : 'closed'}
+            transition={{ duration: 0.3 }}
+            onClick={() => setIsOpen(!isOpen)}
+            className={`p-2 rounded-full ${isDarkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'}`}
+          >
+            <ChevronRight className="w-6 h-6" />
+          </motion.button>
         </div>
-      </div>
-      <nav className="flex-1 px-2 py-4 space-y-2">
-        <SidebarItem icon={<Clipboard />} text="Tasks"to="/" active={location.pathname === '/'} />
-        <SidebarItem icon={<Zap />} text="Activities" to="/activities" active={location.pathname === '/activities'} />
-        <div className="pt-4 pb-2">
-          <p className="px-4 text-xs font-bold text-gray-400 uppercase">MAIN</p>
-        </div>
-        <SidebarItem icon={<LayoutDashboard />} text="Dashboard" to="/dashboard" active={location.pathname === '/dashboard'} />
-        <SidebarItem icon={<Calendar />} text="Schedule" to="/schedule" active={location.pathname === '/schedule'} />
-        <SidebarItem icon={<Clipboard />} text="Note" to="/note" active={location.pathname === '/note'} />
-        <SidebarItem icon={<BarChart2 />} text="Report" to="/report" active={location.pathname === '/report'} />
-        <div className="pt-4 pb-2">
-          <p className="px-4 text-xs font-bold text-gray-400 uppercase">RECORDS</p>
-        </div>
-        <SidebarItem icon={<Users />} text="Team" to="/team" active={location.pathname === '/team'} />
-        <SidebarItem icon={<UserCircle2 />} text="Clients" to="/clients" active={location.pathname === '/clients'} />
-        <SidebarItem icon={<Settings />} text="Settings" to="/settings" active={location.pathname === '/settings'} />
-        <SidebarItem icon={<HelpCircle />} text="Support" to="/support" active={location.pathname === '/support'} />
-      </nav>
-      <div className="p-4 border-t border-gray-200">
-        <div className="flex items-center">
-          <img src="https://demo-source.imgix.net/head_shot.jpg" alt="User" className="w-8 h-8 rounded-full mr-0" />
-          <div>
-            <p className="text-sm font-medium">Prem R</p>
-            <p className="text-xs text-gray-500">premraviraj2004@gmail.com</p>
-          </div>
-        </div>
-      </div>
-    </aside>
-  );
-};
 
-const SidebarItem = ({ icon, text, count, to, active }: { icon: React.ReactNode; text: string; count?: number; to: string; active: boolean }) => {
-  return (
-    <Link to={to} className={`flex items-center px-4 py-2 text-sm font-medium rounded-md ${active ? 'bg-indigo-100 text-indigo-600' : 'text-gray-600 hover:bg-gray-100'}`}>
-      {icon}
-      <span className="ml-3">{text}</span>
-      {count && <span className={`ml-auto ${active ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800'} py-0.5 px-2 rounded-full text-xs`}>{count}</span>}
-    </Link>
+        <AnimatePresence>
+          {showCredentials && isOpen && (
+            <motion.div
+              variants={credentialsVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              className={`absolute top-20 left-4 right-4 ${isDarkMode ? 'bg-gray-700' : 'bg-gray-100'} p-4 rounded-lg shadow-lg z-50`}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-bold">User Profile</h3>
+                <button 
+                  onClick={() => setShowCredentials(false)}
+                  className={`p-1 rounded-full ${isDarkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-200'}`}
+                >
+                  ×
+                </button>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center space-x-2">
+                  <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
+                    P
+                  </div>
+                  <div>
+                    <div className="font-semibold">Prem R</div>
+                    <div className="text-sm text-gray-500">Administrator</div>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2 text-sm">
+                  <Mail size={14} />
+                  <span>premraviraj@gmail.com</span>
+                </div>
+                <div className="flex items-center space-x-2 text-sm">
+                  <Phone size={14} />
+                  <span>+91 9876543210</span>
+                </div>
+                <div className={`text-xs mt-2 p-2 rounded ${isDarkMode ? 'bg-gray-600' : 'bg-gray-200'}`}>
+                  Last login: {new Date().toLocaleString()}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <nav>
+          <AnimatePresence>
+            {menuItems.map((item, index) => (
+              <motion.div
+                key={item.path}
+                variants={menuItemVariants}
+                initial="closed"
+                animate="open"
+                exit="closed"
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+              >
+                <Link
+                  to={item.path}
+                  className={`flex items-center space-x-4 mb-4 p-2 rounded ${isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'} transition-colors duration-200`}
+                >
+                  {item.icon}
+                  {isOpen && <span>{item.label}</span>}
+                </Link>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </nav>
+      </div>
+      <motion.button 
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={onLogout}
+        className={`p-4 ${isDarkMode ? 'text-red-400 hover:text-red-300' : 'text-red-600 hover:text-red-700'} transition-colors duration-300 flex items-center justify-center`}
+        title="Logout"
+      >
+        <LogOut className="w-6 h-6" />
+      </motion.button>
+    </motion.div>
   );
 };
 
