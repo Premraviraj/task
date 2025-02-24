@@ -19,8 +19,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onLogout, isDarkMode }) => {
     { icon: <Calendar className="w-6 h-6" />, label: 'Schedule', path: '/schedule' },
     { icon: <MessageSquare className="w-6 h-6" />, label: 'Activities', path: '/activities' },
     { icon: <Users className="w-6 h-6" />, label: 'Team', path: '/team' },
-    { icon: <Settings className="w-6 h-6" />, label: 'Settings', path: '/settings' },
-    { icon: <HelpCircle className="w-6 h-6" />, label: 'Support', path: '/support' },
   ];
 
   const sidebarVariants = {

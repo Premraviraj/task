@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { MessageCircle, Phone,Mail, Users, FileText, CreditCard, BarChart2, HelpCircle } from 'lucide-react';
 
 const Support = () => {
